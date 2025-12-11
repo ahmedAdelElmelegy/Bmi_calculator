@@ -99,6 +99,7 @@ class ResultScreen extends StatelessWidget {
                     verticalSpace(16),
                     if (cubit.resultDetail.isNotEmpty)
                       Container(
+                        width: double.infinity,
                         padding: EdgeInsets.symmetric(
                           vertical: 16.h,
                           horizontal: 16,
