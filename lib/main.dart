@@ -5,9 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ScreenUtil.ensureScreenSize();
+  await ScreenUtil.ensureScreenSize();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: Colors.white),
   );
@@ -29,18 +29,20 @@ class BmiCalculator extends StatelessWidget {
       designSize: Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => BlocProvider(
-        create: (context) => BmiCalculatorCubit(),
-        child: MaterialApp(
-          theme: ThemeData(
-            useMaterial3: true,
-            scaffoldBackgroundColor: Colors.white,
-          ),
+      builder: (context, child) {
+        return BlocProvider(
+          create: (context) => BmiCalculatorCubit(),
+          child: MaterialApp(
+            theme: ThemeData(
+              useMaterial3: true,
+              scaffoldBackgroundColor: Colors.white,
+            ),
 
-          debugShowCheckedModeBanner: false,
-          home: HomeScreen(),
-        ),
-      ),
+            debugShowCheckedModeBanner: false,
+            home: HomeScreen(),
+          ),
+        );
+      },
     );
   }
 }

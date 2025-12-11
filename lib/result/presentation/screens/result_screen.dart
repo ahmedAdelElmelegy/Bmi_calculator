@@ -13,15 +13,32 @@ class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
   static List<GaugeModel> gaugeModels = [
     GaugeModel(
-      color: ColorManager.gauge1,
+      color: ColorManager.gauge1, // Severe Underweight
       label: 'Severe\nUnderweight',
-      value: 40.0,
+      value: 16, // 0 → 16
     ),
-    GaugeModel(color: ColorManager.gauge2, label: 'Underweight', value: 6.0),
-    GaugeModel(color: ColorManager.gauge3, label: 'Normal', value: 16.0),
-    GaugeModel(color: ColorManager.gauge4, label: 'Overweight', value: 13.0),
-    GaugeModel(color: ColorManager.gauge5, label: 'Obesity', value: 25.0),
+    GaugeModel(
+      color: ColorManager.gauge2, // Underweight
+      label: 'Underweight',
+      value: 2.5, // 16 → 18.5 (فرق 2.5)
+    ),
+    GaugeModel(
+      color: ColorManager.gauge3, // Normal
+      label: 'Normal',
+      value: 6.5, // 18.5 → 25
+    ),
+    GaugeModel(
+      color: ColorManager.gauge4, // Overweight
+      label: 'Overweight',
+      value: 5, // 25 → 30
+    ),
+    GaugeModel(
+      color: ColorManager.gauge5, // Obesity
+      label: 'Obesity',
+      value: 10, // 30 → 40
+    ),
   ];
+
   static List<Map<String, dynamic>> cateogyList = [
     {
       "catName": "Underweight",
@@ -78,6 +95,8 @@ class ResultScreen extends StatelessWidget {
                     // your bmi
                     PrettyGauge(
                       gaugeSize: 200,
+                      minValue: 0,
+                      maxValue: 40,
                       segments: gaugeModels
                           .map((e) => GaugeSegment(e.label, e.value, e.color))
                           .toList(),

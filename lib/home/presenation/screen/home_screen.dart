@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   final cubit = context.read<BmiCalculatorCubit>();
                   if (cubit.age > 1 &&
-                      cubit.height > 100 &&
+                      cubit.height > 99 &&
                       cubit.weight > 1 &&
                       cubit.gender > -1) {
                     cubit.calculateBMI();
