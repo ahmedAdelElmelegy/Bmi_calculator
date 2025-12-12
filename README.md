@@ -1,16 +1,81 @@
-# bmi_calculator
+# BMI Tracker
 
-A new Flutter project.
+**Track your Body Mass Index (BMI) easily with a modern, interactive UI!**
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 App Features
 
-A few resources to get you started if this is your first Flutter project:
+* **BMI Calculation:** Enter height, weight, age, and gender to calculate BMI.
+* **Interactive Gauge:** Visualize BMI using an animated gauge.
+* **Detailed Health Results:** Recommendations and health risks based on your BMI.
+* **Category Colors:** Underweight, Normal, Overweight, Obesity.
+* **Responsive UI:** Works on all screen sizes using ScreenUtil.
+* **MVVM Architecture:** Clean, maintainable code with Flutter Bloc.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🖼️ Screenshots
+
+| Home Screen                                                               | Result Screen                                                                 |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![Home ](assets/images/screenshots/home.jpg) | ![Result ](assets/images/screenshots/result.jpg) |
+
+> Replace placeholders with actual screenshots from your app.
+
+---
+
+## 🛠️ Technologies & Packages
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  bloc: ^9.1.0
+  flutter_bloc: ^9.1.1
+  cupertino_icons: ^1.0.8
+  flutter_launcher_icons: ^0.14.4
+  flutter_screenutil: ^5.9.3
+  shimmer: ^3.0.0
+  simple_ruler_picker: ^0.1.1
+  syncfusion_flutter_gauges: ^31.2.18
+```
+
+* **Bloc & Flutter Bloc:** State management.
+* **ScreenUtil:** Responsive UI design.
+* **Syncfusion Gauges:** Interactive BMI gauge.
+* **Shimmer:** Loading animations.
+* **Simple Ruler Picker:** Height & weight input.
+
+---
+
+## 🏗️ Architecture
+
+**MVVM (Model-View-ViewModel):**
+
+* **Model:** Data structures for BMI and user info.
+* **View:** Screens like Home, Result, Categories.
+* **ViewModel:** Business logic using Bloc/Cubit.
+
+---
+
+## 📌 Usage
+
+1. Clone the repo:
+
+```bash
+git clone <your-repo-url>
+```
+
+2. Install dependencies:
+
+```bash
+flutter pub get
+```
+
+3. Run the app:
+
+```bash
+flutter run
+```
+

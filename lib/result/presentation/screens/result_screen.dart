@@ -1,69 +1,62 @@
+// ========================= BMI RESULT SCREEN (FIXED) =========================
 import 'package:bmi_calculator/core/theme/colors.dart';
 import 'package:bmi_calculator/core/theme/style.dart';
 import 'package:bmi_calculator/home/presenation/manager/cubit/bmi_calculator_cubit.dart';
 import 'package:bmi_calculator/home/presenation/widget/spacing.dart';
-import 'package:bmi_calculator/result/data/model/gauge_model.dart';
 import 'package:bmi_calculator/result/presentation/widget/bmi_category_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pretty_gauge/pretty_gauge.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
-  static List<GaugeModel> gaugeModels = [
-    GaugeModel(
-      color: ColorManager.gauge1, // Severe Underweight
-      label: 'Severe\nUnderweight',
-      value: 16, // 0 → 16
-    ),
-    GaugeModel(
-      color: ColorManager.gauge2, // Underweight
-      label: 'Underweight',
-      value: 2.5, // 16 → 18.5 (فرق 2.5)
-    ),
-    GaugeModel(
-      color: ColorManager.gauge3, // Normal
-      label: 'Normal',
-      value: 6.5, // 18.5 → 25
-    ),
-    GaugeModel(
-      color: ColorManager.gauge4, // Overweight
-      label: 'Overweight',
-      value: 5, // 25 → 30
-    ),
-    GaugeModel(
-      color: ColorManager.gauge5, // Obesity
-      label: 'Obesity',
-      value: 10, // 30 → 40
-    ),
-  ];
 
-  static List<Map<String, dynamic>> cateogyList = [
+  // ---------------- GAUGE SEGMENTS ----------------
+
+  static List<Map<String, dynamic>> maleCategories = [
     {
       "catName": "Underweight",
-      "catValue": "Below 18.5",
+      "catValue": "Below 18",
       "catColor": ColorManager.gauge1,
     },
     {
       "catName": "Normal",
-      "catValue": "18.5 - 24.9",
+      "catValue": "18 - 25",
       "catColor": ColorManager.gauge2,
     },
     {
       "catName": "Overweight",
-      "catValue": "24.9 to 29.9",
+      "catValue": "25 - 30",
       "catColor": ColorManager.gauge3,
     },
-    {
-      "catName": "Obesity",
-      "catValue": "30 or greater",
-      "catColor": ColorManager.gauge5,
-    },
+    {"catName": "Obesity", "catValue": "30+", "catColor": ColorManager.gauge5},
   ];
+
+  static List<Map<String, dynamic>> femaleCategories = [
+    {
+      "catName": "Underweight",
+      "catValue": "Below 18.0",
+      "catColor": ColorManager.gauge1,
+    },
+    {
+      "catName": "Normal",
+      "catValue": "18.0 - 25",
+      "catColor": ColorManager.gauge2,
+    },
+    {
+      "catName": "Overweight",
+      "catValue": "25 - 30",
+      "catColor": ColorManager.gauge3,
+    },
+    {"catName": "Obesity", "catValue": "30+", "catColor": ColorManager.gauge5},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<BmiCalculatorCubit>();
+    final categories = cubit.gender == 1 ? maleCategories : femaleCategories;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -76,37 +69,80 @@ class ResultScreen extends StatelessWidget {
                   Row(
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
+                        onTap: () => Navigator.pop(context),
                         child: Icon(Icons.arrow_back),
                       ),
                       horizontalSpace(8),
-                      Text('YOUR BMi', style: AppStyle.f16UrbanistBold),
+                      Text('YOUR BMI', style: AppStyle.f16UrbanistBold),
                     ],
                   ),
                   Icon(Icons.info),
                 ],
               ),
+
               SingleChildScrollView(
                 child: Column(
                   children: [
                     verticalSpace(16),
-                    // your bmi
-                    PrettyGauge(
-                      gaugeSize: 200,
-                      minValue: 0,
-                      maxValue: 40,
-                      segments: gaugeModels
-                          .map((e) => GaugeSegment(e.label, e.value, e.color))
-                          .toList(),
-                      currentValue: cubit.bmiValue,
-                      displayWidget: Text(
-                        cubit.bmiCategory,
-                        style: AppStyle.f16UrbanistBold,
+
+                    SizedBox(
+                      height: 200,
+                      child: SfRadialGauge(
+                        axes: <RadialAxis>[
+                          RadialAxis(
+                            minimum: 0,
+                            maximum: 40,
+                            ranges: <GaugeRange>[
+                              GaugeRange(
+                                startValue: 0,
+                                endValue: 18,
+                                color: ColorManager.gauge1,
+                              ),
+                              GaugeRange(
+                                startValue: 18,
+                                endValue: 25,
+                                color: ColorManager.gauge2,
+                              ),
+                              GaugeRange(
+                                startValue: 25,
+                                endValue: 30,
+                                color: ColorManager.gauge4,
+                              ),
+                              GaugeRange(
+                                startValue: 30,
+                                endValue: 40,
+                                color: Colors.redAccent,
+                              ),
+                            ],
+                            pointers: <GaugePointer>[
+                              NeedlePointer(value: cubit.bmiValue),
+                            ],
+                            annotations: <GaugeAnnotation>[
+                              GaugeAnnotation(
+                                widget: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      cubit.bmiValue.toStringAsFixed(2),
+                                      style: AppStyle.f14UrbanistReg,
+                                    ),
+                                    Text(
+                                      cubit.bmiCategory,
+                                      style: AppStyle.f12UrbanisRegular,
+                                    ),
+                                  ],
+                                ),
+                                angle: 90,
+                                positionFactor: 0.5,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
+
                     verticalSpace(24),
+
                     Row(
                       children: [
                         Text(
@@ -115,7 +151,9 @@ class ResultScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     verticalSpace(16),
+
                     if (cubit.resultDetail.isNotEmpty)
                       Container(
                         width: double.infinity,
@@ -133,18 +171,20 @@ class ResultScreen extends StatelessWidget {
                           style: AppStyle.f14UrbanistReg,
                         ),
                       ),
+
                     verticalSpace(16),
+
                     Column(
                       children: List.generate(
-                        cateogyList.length,
+                        categories.length,
                         (index) => Padding(
                           padding: EdgeInsets.only(
-                            bottom: index == cateogyList.length - 1 ? 0 : 8.0,
+                            bottom: index == categories.length - 1 ? 0 : 8.0,
                           ),
                           child: BmiCategoryItem(
-                            categoryName: cateogyList[index]['catName'],
-                            categoryDes: cateogyList[index]['catValue'],
-                            categoryColor: cateogyList[index]['catColor'],
+                            categoryName: categories[index]['catName'],
+                            categoryDes: categories[index]['catValue'],
+                            categoryColor: categories[index]['catColor'],
                           ),
                         ),
                       ),

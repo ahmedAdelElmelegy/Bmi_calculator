@@ -67,65 +67,117 @@ class BmiCalculatorCubit extends Cubit<BmiCalculatorState> {
     BmiResultSucess();
   }
 
+  // void calculateBmiCategoryAndDetail(double bmi) {
+  //   String genderString = gender == 1 ? 'Male' : 'Female';
+
+  //   if (gender == 1) {
+  //     // ----------- MALE -----------
+  //     if (bmi < 18.5) {
+  //       bmiCategory = "Underweight";
+  //       resultDetail =
+  //           "Your BMI indicates that you are under the healthy weight range.\n"
+  //           "Health Risks: Weakened immunity, fatigue, nutritional deficiencies, lower muscle mass.\n"
+  //           "Recommendation: Increase calorie intake with nutritious foods.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     } else if (bmi < 25) {
+  //       bmiCategory = "Normal";
+  //       resultDetail =
+  //           "Your BMI is within the healthy range.\n"
+  //           "Health Risks: Lowest risk for most weight-related issues.\n"
+  //           "Recommendation: Maintain a balanced diet and stay active.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     } else if (bmi < 30) {
+  //       bmiCategory = "Overweight";
+  //       resultDetail =
+  //           "Your BMI is slightly above the ideal range.\n"
+  //           "Health Risks: Higher risk of diabetes and high blood pressure.\n"
+  //           "Recommendation: Reduce sugar, increase activity.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     } else {
+  //       bmiCategory = "Obesity";
+  //       resultDetail =
+  //           "Your BMI indicates obesity.\n"
+  //           "Health Risks: Heart disease, sleep apnea, diabetes.\n"
+  //           "Recommendation: Follow a structured weight-loss program.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     }
+  //   } else {
+  //     // ----------- FEMALE -----------
+  //     if (bmi < 18.0) {
+  //       bmiCategory = "Underweight";
+  //       resultDetail =
+  //           "Your BMI indicates that you are under the healthy weight range.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     } else if (bmi < 24.5) {
+  //       bmiCategory = "Normal";
+  //       resultDetail =
+  //           "Your BMI is within the healthy range.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     } else if (bmi < 30) {
+  //       bmiCategory = "Overweight";
+  //       resultDetail =
+  //           "Your BMI is slightly above the ideal range.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     } else {
+  //       bmiCategory = "Obesity";
+  //       resultDetail =
+  //           "Your BMI indicates obesity.\n"
+  //           "Gender: $genderString • Age: $age";
+  //     }
+  //   }
+
+  //   debugPrint(bmiCategory);
+  // }
   void calculateBmiCategoryAndDetail(double bmi) {
     String genderString = gender == 1 ? 'Male' : 'Female';
 
     if (gender == 1) {
-      // ----------- MALE -----------
+      // ---------------- MALE ----------------
       if (bmi < 18.5) {
         bmiCategory = "Underweight";
         resultDetail =
             "Your BMI indicates that you are under the healthy weight range.\n"
-            "Health Risks: Weakened immunity, fatigue, nutritional deficiencies, lower muscle mass.\n"
-            "Recommendation: Increase calorie intake with nutritious foods.\n"
+            "Health Risks: Weakened immunity, fatigue, nutritional deficiencies.\n"
+            "Recommendation: Increase calorie intake.\n"
             "Gender: $genderString • Age: $age";
       } else if (bmi < 25) {
         bmiCategory = "Normal";
         resultDetail =
             "Your BMI is within the healthy range.\n"
-            "Health Risks: Lowest risk for most weight-related issues.\n"
-            "Recommendation: Maintain a balanced diet and stay active.\n"
+            "Recommendation: Maintain a balanced diet.\n"
             "Gender: $genderString • Age: $age";
       } else if (bmi < 30) {
         bmiCategory = "Overweight";
         resultDetail =
             "Your BMI is slightly above the ideal range.\n"
-            "Health Risks: Higher risk of diabetes and high blood pressure.\n"
-            "Recommendation: Reduce sugar, increase activity.\n"
+            "Recommendation: Reduce sugars and increase activity.\n"
             "Gender: $genderString • Age: $age";
       } else {
         bmiCategory = "Obesity";
         resultDetail =
             "Your BMI indicates obesity.\n"
-            "Health Risks: Heart disease, sleep apnea, diabetes.\n"
             "Recommendation: Follow a structured weight-loss program.\n"
             "Gender: $genderString • Age: $age";
       }
     } else {
-      // ----------- FEMALE -----------
+      // ---------------- FEMALE ----------------
       if (bmi < 18.0) {
         bmiCategory = "Underweight";
         resultDetail =
-            "Your BMI indicates that you are under the healthy weight range.\n"
-            "Gender: $genderString • Age: $age";
+            "Your BMI indicates you are underweight.\nGender: $genderString • Age: $age";
       } else if (bmi < 24.5) {
         bmiCategory = "Normal";
         resultDetail =
-            "Your BMI is within the healthy range.\n"
-            "Gender: $genderString • Age: $age";
+            "Your BMI is healthy.\nGender: $genderString • Age: $age";
       } else if (bmi < 30) {
         bmiCategory = "Overweight";
         resultDetail =
-            "Your BMI is slightly above the ideal range.\n"
-            "Gender: $genderString • Age: $age";
+            "You are slightly overweight.\nGender: $genderString • Age: $age";
       } else {
         bmiCategory = "Obesity";
         resultDetail =
-            "Your BMI indicates obesity.\n"
-            "Gender: $genderString • Age: $age";
+            "Your BMI indicates obesity.\nGender: $genderString • Age: $age";
       }
     }
-
-    debugPrint(bmiCategory);
   }
 }
